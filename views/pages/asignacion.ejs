@@ -28,6 +28,8 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
+          <% items.forEach(function(r) { %> 
+            <% r.orders.forEach(function(i) { %>
             <div class="rondhon-menu-item mt-30">
               <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -38,20 +40,11 @@
                 <div class="col-lg-5 col-md-8">
                   <div class="rondhon-menu-content">
                     <h3 class="title">
-                      <a href="#"><% items.forEach(function(r) { %>
-                        <%=  %> 
-                        <% r.orders.forEach(function(i) { %>
-                          <%= i.client_first_name %> <%= i.client_last_name %> 
-                          <% }); %>
-                    <% }); %></a>
+                      <a href="#"><%= i.client_first_name %> <%= i.client_last_name %> 
+                          </a>
                     </h3>
                     <p>
-                      <% items.forEach(function(r) { %>
-                        <li><%= r.count %> - 
-                        <% r.orders.forEach(function(i) { %>
-                          <%= i.client_first_name %>
-                          <% }); %>
-                    <% }); %></li>
+                      <li> <%= i.client_phone %> </li>
                       -----<br>
                       Food Type:Chicken Stick <br />Delivery time:60
                       Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
@@ -62,7 +55,7 @@
                 </div>
                 <div class="col-lg-2 col-md-4">
                   <div class="randhon-menu-review">
-                    <h4>$86</h4>
+                    <h4><%= i.total_price %> Gs. </h4>
                     <span>Restaurant:</span>
                     <p>Dallas Pizza- USA</p>
                     <div class="list">
@@ -94,6 +87,8 @@
                 </div>
               </div>
             </div>
+            <% }); %>
+                    <% }); %>
 <!--             <div class="rondhon-menu-item mt-30">
               <div class="row align-items-center">
                 <div class="col-lg-5">
