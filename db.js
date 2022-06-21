@@ -1,12 +1,12 @@
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient, ObjectId , ServerApiVersion} = require("mongodb");
 
-const connectionUrl = "mongodb://localhost:27017";
+const connectionUrl = "mongodb+srv://st3v3nk1ng:7ent2NkfJX7uvWuq@delivery-tracker.46lxb.mongodb.net/?retryWrites=true&w=majority";
 const dbName = "delivery-tracker";
 
 let db;
 
 const init = () =>
-  MongoClient.connect(connectionUrl, { useNewUrlParser: true }).then(
+  MongoClient.connect(connectionUrl, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1}).then(
     (client) => {
       db = client.db(dbName);
     }
