@@ -38,9 +38,21 @@
                 <div class="col-lg-5 col-md-8">
                   <div class="rondhon-menu-content">
                     <h3 class="title">
-                      <a href="#">Heirloom Tomato Caprese</a>
+                      <a href="#"><% items.forEach(function(r) { %>
+                        <%=  %> 
+                        <% r.orders.forEach(function(i) { %>
+                          <%= i.client_first_name %> <%= i.client_last_name %> 
+                          <% }); %>
+                    <% }); %></a>
                     </h3>
                     <p>
+                      <% items.forEach(function(r) { %>
+                        <li><%= r.count %> - 
+                        <% r.orders.forEach(function(i) { %>
+                          <%= i.client_first_name %>
+                          <% }); %>
+                    <% }); %></li>
+                      -----<br>
                       Food Type:Chicken Stick <br />Delivery time:60
                       Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
                       arcu sit amet,
@@ -82,7 +94,7 @@
                 </div>
               </div>
             </div>
-            <div class="rondhon-menu-item mt-30">
+<!--             <div class="rondhon-menu-item mt-30">
               <div class="row align-items-center">
                 <div class="col-lg-5">
                   <div class="rondhon-menu-thumb">
@@ -683,7 +695,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="row">
           <div class="col-lg-12">
@@ -696,9 +708,9 @@
                         ><i class="fal fa-arrow-left"></i></span
                     ></a>
                   </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link active" href="#">1</a></li>
                   <li class="page-item">
-                    <a class="page-link active" href="#">2</a>
+                    <a class="page-link" href="#">2</a>
                   </li>
                   <li class="page-item"><a class="page-link" href="#">3</a></li>
                   <li class="page-item"><a class="page-link" href="#">4</a></li>

@@ -56,4 +56,21 @@ router.put("/item/:id/orders/:orders", (req, res) => {
     });
 });
 
+router.get("/render", (req, res) => {
+  getItems()
+    .then((items) => {
+      items = items.map((item) => ({
+        id: item._id,
+        count: item.count,
+        orders: item.orders,
+      }));
+      res.render("pages/asignacion", {items});
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).end();
+    });
+});
+
+
 module.exports = router;
