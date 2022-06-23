@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-lg-2 col-md-4">
                   <div class="randhon-menu-review">
-                    <h4><%= i.total_price %> Gs. </h4>
+                    <h4><%= i.total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); %> Gs. </h4>
                     <span>Restaurant:</span>
                     <p>Dallas Pizza- USA</p>
                     <div class="list">
