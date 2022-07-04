@@ -44,28 +44,34 @@
                           </a>
                     </h3>
                     <p>
-                      <li> <%= i.client_phone %> </li>
-                      -----<br>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
+                      Celular: <%= i.client_phone %>
+                      <br>
+                      <a class="main-btn" onclick="myFunction()" href="#">Ocultar Datos </a>
+                      <br />
+                      <br />
+                      <div id="showDiv"> 
+                        <ul> <% i.items.forEach(function(c) { %> 
+                        <li> <%= c.name  %> :  <%= c.total_item_price  %>   </li>
+                      </ul> <% }) %> 
+                      </div>
+                      <!-- Delivery Cost:Free Duis mauris augue,efficitur eu
+                      arcu sit amet, -->
                     </p>
-                    <a class="main-btn" href="#">Add to Order</a>
                   </div>
                 </div>
                 <div class="col-lg-2 col-md-4">
                   <div class="randhon-menu-review">
                     <h4><%= i.total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); %> Gs. </h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
+                    <span>Fecha y Hora Pedido:</span>
+                    <p> <%= i.fulfill_at.replace("T", " | ").replace(".000Z", "")  %> </p>
                     <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
+                      <ul> 
+                        <li> 
+                          <span> </span><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i>
-                        </li>
+                        </li><!-- 
                         <li>
                           <span>35</span><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i><i class="fas fa-star"></i
@@ -75,18 +81,19 @@
                           <span>10</span><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i>
-                        </li>
+                        </li> 
                         <li>
                           <span>6</span><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i>
                         </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
+                        <li><span>2</span><i class="fas fa-star"></i></li>-->
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <br>
             <% }); %>
                     <% }); %>
 <!--             <div class="rondhon-menu-item mt-30">
@@ -727,5 +734,15 @@
         </div>
       </div>
     </section>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("showDiv");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+      </script>
   </body>
 </html>

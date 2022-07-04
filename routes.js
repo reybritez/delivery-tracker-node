@@ -28,21 +28,21 @@ router.post("/api", (req, res) => {
     });
 });
 
-router.get("/items", (req, res) => {
-  getItems()
-    .then((items) => {
-      items = items.map((item) => ({
-        id: item._id,
-        count: item.count,
-        orders: item.orders,
-      }));
-      res.json(items);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).end();
-    });
-});
+// router.get("/items", (req, res) => {
+//   getItems()
+//     .then((items) => {
+//       items = items.map((item) => ({
+//         id: item._id,
+//         count: item.count,
+//         orders: item.orders,
+//       }));
+//       res.json(items);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).end();
+//     });
+// });
 
 router.put("/item/:id/orders/:orders", (req, res) => {
   const { id, orders } = req.params;
