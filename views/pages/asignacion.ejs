@@ -28,8 +28,8 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-          <% items.forEach(function(r) { %> 
-            <% r.orders.forEach(function(i) { %>
+          <% items.forEach(function(pedidos) { %> 
+            <% pedidos.orders.forEach(function(object) { %>
             <div class="rondhon-menu-item mt-30">
               <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -39,31 +39,42 @@
                 </div>
                 <div class="col-lg-5 col-md-8">
                   <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#"><%= i.client_first_name %> <%= i.client_last_name %> 
-                          </a>
+                    <h3 class="title">  <!-- Espacio de envio de mensajes automatico a whatsapp  -->
+                      <a href="https://api.whatsapp.com/send?phone=<%= object.client_phone.replace('+','') %>&text=Hola!%20Te%20escribimos%20para%20confirmar%20tu%20pedido"><%= object.client_first_name %> <%= object.client_last_name %> 
+                          <br>
+                        <p> <strong>  <%= object.client_phone %> </strong></p></a>
                     </h3>
                     <p>
-                      Celular: <%= i.client_phone %>
-                      <br>
-                      <a class="main-btn" onclick="myFunction()" href="#">Ocultar Datos </a>
-                      <br />
-                      <br />
-                      <div id="showDiv"> 
-                        <ul> <% i.items.forEach(function(c) { %> 
-                        <li> <%= c.name  %> :  <%= c.total_item_price  %>   </li>
-                      </ul> <% }) %> 
+                      <button type="button" class="main-btn" data-open="modal1">Ver Pedido</button>
+
+                      <div class="modal" id="modal1">
+                        <div class="modal-dialog">
+                          <header class="modal-header">
+                            
+                            <button class="close-modal" aria-label="close modal" data-close>
+                              ✕  Cerrar 
+                            </button>
+                          </header>
+                          <section class="modal-content">
+                            <p><strong><% object.items.forEach(function(pedido) {  %> </strong></p> <!--- No está iterando por algun motivo -->
+                            <p>  </p>
+                            <p><strong><%= pedido.name %></strong> </p> --> <%= pedido.quantity %> </p>
+                            <p>Arriba estara citada el pedido del cliente y podrá ser asignado a un delivery abajo.</p>
+                            <% typeof pedido}); %> 
+                          </section>
+                          <footer class="modal-footer">
+                            Asignar delivery
+                          </footer>
+                        </div>
                       </div>
-                      <!-- Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet, -->
                     </p>
                   </div>
                 </div>
                 <div class="col-lg-2 col-md-4">
                   <div class="randhon-menu-review">
-                    <h4><%= i.total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); %> Gs. </h4>
+                    <h4><%= object.total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); %> Gs. </h4>
                     <span>Fecha y Hora Pedido:</span>
-                    <p> <%= i.fulfill_at.replace("T", " | ").replace(".000Z", "")  %> </p>
+                    <p> <%= object.fulfill_at.replace("T", " | ").replace(".000Z", "")  %> </p>
                     <div class="list">
                       <ul> 
                         <li> 
@@ -71,22 +82,7 @@
                           ><i class="fas fa-star"></i><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i
                           ><i class="fas fa-star"></i>
-                        </li><!-- 
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
                         </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li> 
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>-->
                       </ul>
                     </div>
                   </div>
@@ -96,610 +92,8 @@
             <br>
             <% }); %>
                     <% }); %>
-<!--             <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-2.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Grilled Peach & Summer Berries</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-3.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Prisciutto E Funghi Pizza</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-4.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Heirloom Tomato Caprese</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-5.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Heirloom Tomato Caprese</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-6.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Heirloom Tomato Caprese</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="tab-pane fade"
-            id="pills-profile"
-            role="tabpanel"
-            aria-labelledby="pills-profile-tab"
-          >
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-1.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Heirloom Tomato Caprese</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-2.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Grilled Peach & Summer Berries</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-3.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Prisciutto E Funghi Pizza</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-4.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Heirloom Tomato Caprese</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-5.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Heirloom Tomato Caprese</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rondhon-menu-item mt-30">
-              <div class="row align-items-center">
-                <div class="col-lg-5">
-                  <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-6.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col-lg-5 col-md-8">
-                  <div class="rondhon-menu-content">
-                    <h3 class="title">
-                      <a href="#">Heirloom Tomato Caprese</a>
-                    </h3>
-                    <p>
-                      Food Type:Chicken Stick <br />Delivery time:60
-                      Minutes,Delivery Cost:Free Duis mauris augue,efficitur eu
-                      arcu sit amet,
-                    </p>
-                    <a class="main-btn" href="#">Add to Order</a>
-                  </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                  <div class="randhon-menu-review">
-                    <h4>$86</h4>
-                    <span>Restaurant:</span>
-                    <p>Dallas Pizza- USA</p>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <span>50</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>35</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>10</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                          <span>6</span><i class="fas fa-star"></i
-                          ><i class="fas fa-star"></i>
-                        </li>
-                        <li><span>2</span><i class="fas fa-star"></i></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
-        <div class="row">
+<!--         <div class="row">
           <div class="col-lg-12">
             <div class="pagination-area d-flex justify-content-start mt-50">
               <nav aria-label="Page navigation ">
@@ -731,18 +125,39 @@
               </nav>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
     <script>
-      function myFunction() {
-        var x = document.getElementById("showDiv");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
+      const openEls = document.querySelectorAll("[data-open]");
+      const closeEls = document.querySelectorAll("[data-close]");
+      const isVisible = "is-visible";
+
+      for (const el of openEls) {
+        el.addEventListener("click", function() {
+          const modalId = this.dataset.open;
+          document.getElementById(modalId).classList.add(isVisible);
+        });
       }
+
+      for (const el of closeEls) {
+        el.addEventListener("click", function() {
+          this.parentElement.parentElement.parentElement.classList.remove(isVisible);
+        });
+      }
+
+      document.addEventListener("click", e => {
+        if (e.target == document.querySelector(".modal.is-visible")) {
+          document.querySelector(".modal.is-visible").classList.remove(isVisible);
+        }
+      });
+
+      document.addEventListener("keyup", e => {
+        // if we press the ESC
+        if (e.key == "Escape" && document.querySelector(".modal.is-visible")) {
+          document.querySelector(".modal.is-visible").classList.remove(isVisible);
+        }
+      });
       </script>
   </body>
 </html>
