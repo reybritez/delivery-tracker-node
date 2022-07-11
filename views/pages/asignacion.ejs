@@ -74,7 +74,7 @@
                   <div class="randhon-menu-review">
                     <h4><%= object.total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); %> Gs. </h4>
                     <span>Fecha y Hora Pedido:</span>
-                    <p> <%= object.fulfill_at.replace("T", " | ").replace(".000Z", "")  %> </p>
+                    <p> <%= object.updated_at.replace("T", " | ").replace(".000Z", "")  %> </p>
                     <div class="list">
                       <ul> 
                         <li> 
