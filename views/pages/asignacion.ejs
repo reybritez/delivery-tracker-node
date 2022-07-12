@@ -30,7 +30,7 @@
           >
           <% items.forEach(function(pedidos) { %> 
             <% pedidos.orders.forEach(function(object) { %>
-              <% object.items.forEach(function(pedido) {  %>  <!--- No está iterando por algun motivo -->
+              <% object.items.forEach(function(producto) {  %>  <!--- No está iterando por algun motivo -->
             <div class="rondhon-menu-item mt-30">
               <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -59,9 +59,10 @@
                           <section class="modal-content">
                             <p><strong>Algo</strong></p>
                             <p>  </p>
-                            <p><strong><%= pedido.name[1] %></strong> </p> --> <%= pedido.quantity %> </p> <!-- Me devuelve el array, pero al tratar de acceder a cada elemento por cada modal, muere.-->
+                            <p><strong><% for(var i = 0; i < object.items; ++i) {%>
+                            <% object.items[i].name, object.items[i].total_item_price %> <% } %> </strong> </p> </p> <!-- Me devuelve el array, pero al tratar de acceder a cada elemento por cada modal, muere.-->
                             <p>Arriba estara citada el pedido del cliente y podrá ser asignado a un delivery abajo.</p>
-                            <% console.log(pedido); %> 
+                            <% console.log(object.items[i].name, object.items[i].total_item_price ); %>  <!--Imprime, accede al dato, pero no me muestra en el fucking htmll.-->
                           </section>
                           <footer class="modal-footer">
                             Asignar delivery
