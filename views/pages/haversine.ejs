@@ -39,15 +39,14 @@
     </header>
     <!-- header-area end -->
     <!--====== BANNER PART START ======-->
-    
-    <%= a = { latitude: -25.29532798074817, longitude: -57.63251175882659 } %>   
-    <%= b = { latitude: -25.290265220058515, longitude: -57.63671504080936 } %>
-    <%= c = [-25.285302348322254, -57.64627263094485] %>
-    <%= console.log(haversine(a, b)) %>
-    <% listita.forEach(function(r){
-      console.log(haversine(c, r))
-    }) %>
-    
+    <%= c = [-25.285302348322254, -57.64627263094485] %> <!-- Ubi del usuario getCurrentPosition()-->
+    <%= resultao = [] %>
+    <!--- Recorro la lista que estoy mandando desde el backend y agrego a la nueva lista resultao-->
+    <% listita.forEach(function(r){ 
+      resultao.push(haversine(c, r));
+      console.log(resultao);
+    }); %>
+    <%= console.log(Math.min.apply(null, resultao)) %> <!-- min of array resultao -->    
     <!--====== jquery js ======-->
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
