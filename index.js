@@ -16,6 +16,8 @@ init()
     app.set("views", path.join(__dirname, "views"));
     app.set("view engine", "ejs");
     app.get("/", (req, res) => res.render("pages/index"));
+    const haversine = require('haversine-distance') //aca es donde declaro de forma global la funcion haversine
+    app.locals.haversine = haversine;   //envio a variables locales 
     app.listen(PORT, () => console.log(`Listening on ${PORT}`));
   })
   .catch((err) => {
