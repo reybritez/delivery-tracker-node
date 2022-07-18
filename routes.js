@@ -72,5 +72,19 @@ router.get("/render", (req, res) => {
     });
 });
 
-
+router.get("/haversine", (req, res) => {
+  listita = [[-25.28340819899043, -57.64492282013374],[-25.282859968885006, -57.64261207183948]] ;  
+  getItems()
+    .then((lista) => {
+      function logArrayElements(element, index, listita) {
+        for(var i = 0; i < lista ; ++i) {
+          return lista[i];}
+      listita.forEach(logArrayElements);}
+      res.render("pages/haversine",{listita});
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).end();
+    });
+});
 module.exports = router;
