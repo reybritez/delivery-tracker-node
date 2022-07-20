@@ -2,6 +2,23 @@
 <html>
   <head>
     <%- include ("../partials/header.ejs") %>
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 400px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
   </head>
 
   <body>
@@ -30,12 +47,25 @@
           >
           <% items.forEach(function(pedidos) { %> 
             <% pedidos.orders.forEach(function(object) { %>
-              <% object.items.forEach(function(producto) {  %>  <!--- No está iterando por algun motivo -->
+              <% var object = object %>
+                <!--- No está iterando por algun motivo -->
             <div class="rondhon-menu-item mt-30">
               <div class="row align-items-center">
                 <div class="col-lg-5">
                   <div class="rondhon-menu-thumb">
-                    <img src="/stylesheets/assets/images/rondhon-menu-1.jpg" alt="" />
+                    <!-- <img src="/stylesheets/assets/images/rondhon-menu-1.jpg" alt="" /> -->
+                    <div id='map'></div> <!--- YA APARECE EL MAPA CON LOS PUNTOS, ESTÁ ITERANDO PEEEEEEEEEERO NO PUEDE APARECER MÁS DE UNA VEZ EL MAPA POR HTML APARENTEMENTE-->
+                    <script>
+                      var lat = '<%= object.latitude %>';
+                      var lng = '<%= object.longitude %>';
+                      console.log(lat,lng)
+                      var map = L.map('map').setView([-25.29, -57.66], 13);
+                      var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                      }).addTo(map);
+                      var marker = L.marker([lat, lng]).addTo(map);
+                    </script>
                   </div>
                 </div>
                 <div class="col-lg-5 col-md-8">
@@ -45,7 +75,7 @@
                           <br>
                         <p> <strong>  <%= object.client_phone %> </strong></p></a>
                     </h3>
-                    <p>
+                    <p> <%= object.latitude %> , <%= object.longitude %> </p>
                       <button type="button" class="main-btn" data-open="modal1">Ver Pedido</button>
 
                       <div class="modal" id="modal1">
@@ -59,10 +89,6 @@
                           <section class="modal-content">
                             <p><strong>Algo</strong></p>
                             <p>  </p>
-                            <p><strong><% for(var i = 0; i < object.items; ++i) {%>
-                            <% object.items[i].name, object.items[i].total_item_price %> <% } %> </strong> </p> </p> <!-- Me devuelve el array, pero al tratar de acceder a cada elemento por cada modal, muere.-->
-                            <p>Arriba estara citada el pedido del cliente y podrá ser asignado a un delivery abajo.</p>
-                            <% console.log(object.items[i].name, object.items[i].total_item_price ); %>  <!--Imprime, accede al dato, pero no me muestra en el fucking htmll.-->
                           </section>
                           <footer class="modal-footer">
                             Asignar delivery
@@ -92,8 +118,7 @@
               </div>
             </div>
             <br>
-            <% });
-                }); %>
+            <% });  %>
                     <% }); %>
         </div>
 <!--         <div class="row">
