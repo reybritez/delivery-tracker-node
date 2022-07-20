@@ -48,31 +48,69 @@
     }); %>
     <%= console.log(Math.min.apply(null, resultao)) %> <!-- min of array resultao -->    
     <!--====== jquery js ======-->
-
+    <section class="rondhon-menu-area pt-150 pb-150">
+      <div class="container">
+        
+        <p>Latitud: <span id="latitude"> </span></p>
+        <br />
+        <p>Longitud: <span id="longitude"> </span></p>
+        <br />
+      </div>
+    </section>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <script href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js.map"> </script>
-    <script src="/stylesheets/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="/stylesheets/assets/js/vendor/jquery-3.5.1.min.js"></script>
-    <!--====== Bootstrap js ======-->
-    <script src="/stylesheets/assets/js/bootstrap.min.js"></script>
-    <script src="/stylesheets/assets/js/popper.min.js"></script>
-    <!--====== Slick js ======-->
-    <script src="/stylesheets/assets/js/slick.min.js"></script>
-    <!--====== Isotope js ======-->
-    <script src="/stylesheets/assets/js/isotope.pkgd.min.js"></script>
-    <!--====== Images Loaded js ======-->
-    <script src="/stylesheets/assets/js/imagesloaded.pkgd.min.js"></script>
-    <!--====== parallaxie js ======-->
-    <script src="/stylesheets/assets/js/parallaxie.js"></script>
-    <!--====== nice select js ======-->
-    <script src="/stylesheets/assets/js/jquery.nice-select.min.js"></script>
-    <!--====== odometer js ======-->
-    <script src="/stylesheets/assets/js/odometer.min.js"></script>
-    <script src="/stylesheets/assets/js/jquery.appear.min.js"></script>
-    <!--====== Magnific Popup js ======-->
-    <script src="/stylesheets/assets/js/jquery.magnific-popup.min.js"></script>
-    <!--====== Main js ======-->
-    <script src="/stylesheets/assets/js/main.js"></script>
+  <script src="/stylesheets/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+  <script src="/stylesheets/assets/js/vendor/jquery-3.5.1.min.js"></script>
+  <!--====== Bootstrap js ======-->
+  <script src="/stylesheets/assets/js/bootstrap.min.js"></script>
+  <script src="/stylesheets/assets/js/popper.min.js"></script>
+  <!--====== Slick js ======-->
+  <script src="/stylesheets/assets/js/slick.min.js"></script>
+  <!--====== Isotope js ======-->
+  <script src="/stylesheets/assets/js/isotope.pkgd.min.js"></script>
+  <!--====== Images Loaded js ======-->
+  <script src="/stylesheets/assets/js/imagesloaded.pkgd.min.js"></script>
+  <!--====== parallaxie js ======-->
+  <script src="/stylesheets/assets/js/parallaxie.js"></script>
+  <!--====== nice select js ======-->
+  <script src="/stylesheets/assets/js/jquery.nice-select.min.js"></script>
+  <!--====== odometer js ======-->
+  <script src="/stylesheets/assets/js/odometer.min.js"></script>
+  <script src="/stylesheets/assets/js/jquery.appear.min.js"></script>
+  <!--====== Magnific Popup js ======-->
+  <script src="/stylesheets/assets/js/jquery.magnific-popup.min.js"></script>
+  <!--====== Main js ======-->
+  <script src="/stylesheets/assets/js/main.js"></script>
+  <script>
+    var ubi = [];    
 
+    if ("geolocation" in navigator) {
+      console.log("location is available");
+      setInterval(searchPosition, 10000);
+    } else {
+      console.log("geolocation is not available");
+    }
+    
+
+    function searchPosition() {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        document.getElementById("latitude").textContent = lat;
+        document.getElementById("longitude").textContent = lon;
+        const data = { lat, lon };
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+        fetch("/haversine", options);
+      });
+    }
+    console.log(ubi);
+
+  </script>  
   </body>
 </html>
